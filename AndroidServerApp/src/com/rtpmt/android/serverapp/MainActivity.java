@@ -67,7 +67,7 @@ class SendDataTask extends AsyncTask<String, Integer, Long> {
 	protected Long doInBackground(String... str) {
 		try{
 		Communicator communicator = new Communicator();
-		// communicator.initalizeTCPClient("129.21.175.114", 3000);
+		communicator.initalizeTCPClient("129.21.175.114", 3000); 
 		}catch(Exception e){
 			e.printStackTrace();
 		}
