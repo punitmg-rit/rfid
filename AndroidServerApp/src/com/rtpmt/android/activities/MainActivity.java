@@ -1,5 +1,6 @@
 package com.rtpmt.android.activities;
 
+
 import com.rtpmt.android.network.tcp2.Communicator;
 import com.rtpmt.android.network.tcp2.Test;
 import com.rtpmt.android.serverapp.R;
@@ -68,7 +69,27 @@ class SendDataTask extends AsyncTask<String, Integer, Long> {
 	protected Long doInBackground(String... str) {
 		try{
 		Communicator communicator = new Communicator();
-		communicator.initalizeTCPClient("129.21.175.114", 3000); 
+		communicator.initalizeTCPClient("129.21.175.114", 3000);
+		if(!communicator.getConnected())
+        {
+            communicator.connect();
+            if(communicator.getConnected())
+            {
+                if(communicator.initIOStream())
+                { 
+                    if(communicator.initPacketReader())
+                    {
+                        communicator.initListener();
+                        //start location tracker
+                    }
+                }
+            }
+        }
+        else
+        {
+            communicator.disconnect();
+        }
+		communicator.run();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

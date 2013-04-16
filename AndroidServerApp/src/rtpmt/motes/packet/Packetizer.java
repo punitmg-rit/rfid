@@ -147,7 +147,7 @@ public class Packetizer extends AbstractSource implements Runnable {
   synchronized public void open(Messenger messages) throws IOException {
     super.open(messages);
     if (!reader.isAlive()) {
-      reader.start();
+      //reader.start(); 
     }
   }
 

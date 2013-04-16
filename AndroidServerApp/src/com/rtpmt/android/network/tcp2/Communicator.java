@@ -89,64 +89,64 @@ public class Communicator implements Runnable//,SerialPortEventListener
     //pre: ports are already found by using the searchForPorts method
     //post: the connected comm port is stored in commPort, otherwise,
     //an exception is generated
-    /*public void connect()
+    public void connect()
     {
 
-        CommPort commPort = null;
-
-        try
-        {
-            //the method below returns an object of type CommPort
-            commPort = selectedPortIdentifier.open("RFID", TIMEOUT);
-            //the CommPort object can be casted to a SerialPort object
-            serialPort = (SerialPort)commPort;
-            //setting serial port parameters 
-            //this setting is based on telosb mote specification
-            //baud rate is important here i.e(115200)
-            serialPort.setSerialPortParams(115200,SerialPort.DATABITS_8,SerialPort.STOPBITS_1,SerialPort.PARITY_NONE);
+//        CommPort commPort = null;
+//
+//        try
+//        {
+//            //the method below returns an object of type CommPort
+//            commPort = selectedPortIdentifier.open("RFID", TIMEOUT);
+//            //the CommPort object can be casted to a SerialPort object
+//            serialPort = (SerialPort)commPort;
+//            //setting serial port parameters 
+//            //this setting is based on telosb mote specification
+//            //baud rate is important here i.e(115200)
+//            serialPort.setSerialPortParams(115200,SerialPort.DATABITS_8,SerialPort.STOPBITS_1,SerialPort.PARITY_NONE);
             //for controlling GUI elements
             setConnected(true);
                
             
             //CODE ON SETTING BAUD RATE ETC OMITTED
             //XBEE PAIR ASSUMED TO HAVE SAME SETTINGS ALREADY
-        }
-        catch (PortInUseException e)
-        {
-            logText = " is in use. (" + e.toString() + ")";
-            System.out.println(logText);
-            
-        }
-        catch (Exception e)
-        {
-            logText = "Failed to open (" + e.toString() + ")";
-            System.out.println(logText);
-        }
-    }*/
+//        }
+//        catch (PortInUseException e)
+//        {
+//            logText = " is in use. (" + e.toString() + ")";
+//            System.out.println(logText);
+//            
+//        }
+//        catch (Exception e)
+//        {
+//            logText = "Failed to open (" + e.toString() + ")";
+//            System.out.println(logText);
+//        }
+    }
 
     //open the input and output streams
     //pre: an open port
     //post: initialized intput and output streams for use to communicate data
-    /*public boolean initIOStream()
+    public boolean initIOStream()
     {
         //return value for whather opening the streams is successful or not
         boolean successful = false;
 
-        try {
-            //initialize the input and output stream
-            input = serialPort.getInputStream();
-            output = serialPort.getOutputStream();
+//        try {
+//            //initialize the input and output stream
+//            input = serialPort.getInputStream();
+//            output = serialPort.getOutputStream();
            
             //writeData(0, 0);            
             successful = true;
             return successful;
-        }
-        catch (IOException e) {
-            logText = "I/O Streams failed to open. (" + e.toString() + ")";
-            System.out.println(logText);
-            return successful;
-        }
-    }*/
+//        }
+//        catch (IOException e) {
+//            logText = "I/O Streams failed to open. (" + e.toString() + ")";
+//            System.out.println(logText);
+//            return successful;
+//        }
+    }
     /**
     *  Initialize the packet reader from the motes
     *  pre: initialize the input stream and output stream
@@ -173,37 +173,37 @@ public class Communicator implements Runnable//,SerialPortEventListener
     //starts the event listener that knows whenever data is available to be read
     //pre: an open serial port
     //post: an event listener for the serial port that knows when data is recieved
-    /*public void initListener()
+    public void initListener()
     {
-        try
-        {
-            serialPort.addEventListener(this);
-            serialPort.notifyOnDataAvailable(true);
+//        try
+//        {
+//            serialPort.addEventListener(this);
+//            serialPort.notifyOnDataAvailable(true);
             
             if (!bgCommunicator.isAlive()) {
                  bgCommunicator.start();
             }
             
-        }
-        catch (TooManyListenersException e)
-        {
-            logText = "Too many listeners. (" + e.toString() + ")";
-            System.out.println(logText);
-        }
-    }*/
+//        }
+//        catch (TooManyListenersException e)
+//        {
+//            logText = "Too many listeners. (" + e.toString() + ")";
+//            System.out.println(logText);
+//        }
+    }
 
     //disconnect the serial port
     //pre: an open serial port
     //post: clsoed serial port
-    /*public void disconnect()
+    public void disconnect()
     {
         //close the serial port
         try
         {
             writeData(0, 0);
 
-            serialPort.removeEventListener();
-            serialPort.close();
+           // serialPort.removeEventListener();
+           // serialPort.close();
             input.close();
             output.close();
             //diconnect tcp connection
@@ -215,10 +215,10 @@ public class Communicator implements Runnable//,SerialPortEventListener
         }
         catch (Exception e)
         {
-            logText = "Failed to close " + serialPort.getName() + "(" + e.toString() + ")";
+            logText = "Failed to close " /*+ serialPort.getName()*/ + "(" + e.toString() + ")";
             System.out.println(logText);
         }
-    }*/
+    }
 
     final public boolean getConnected()
     {
