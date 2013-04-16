@@ -1,7 +1,8 @@
-package com.rtpmt.android.serverapp;
+package com.rtpmt.android.activities;
 
 import com.rtpmt.android.network.tcp2.Communicator;
 import com.rtpmt.android.network.tcp2.Test;
+import com.rtpmt.android.serverapp.R;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
