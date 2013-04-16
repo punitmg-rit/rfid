@@ -229,11 +229,11 @@ public class Packetizer extends AbstractSource implements Runnable {
   protected SensorInformation readFormattedPacket() throws IOException {
     // Packetizer packet format is identical to PacketSource's
     for (;;) {
-      byte[] packet = readProtocolPacket(P_PACKET_NO_ACK, 0);
-      Dump.printPacket(System.out, packet);
-      if (packet.length >= 1) {
+      //byte[] packet = readProtocolPacket(P_PACKET_NO_ACK, 0);
+      //Dump.printPacket(System.out, packet);
+      //if (packet.length >= 1) {
           
-          PacketHelper packetHelper = new PacketHelper(packet);
+          //PacketHelper packetHelper = new PacketHelper(packet);
           
           SensorInformation.Builder message = SensorInformation.newBuilder();
       
@@ -247,14 +247,14 @@ public class Packetizer extends AbstractSource implements Runnable {
           sensor.setSensorId("1");
           sensor.setSensorUnit("F");
           sensor.setSensorType(SensorInformation.SensorType.TEMPERATURE);
-          sensor.setSensorValue(packetHelper.getTemperature());
+          sensor.setSensorValue("50");//packetHelper.getTemperature());
           message.addSensors(sensor);
           
           sensor = SensorInformation.Sensor.newBuilder();
           sensor.setSensorId("2");
           sensor.setSensorUnit("gValue");
           sensor.setSensorType(SensorInformation.SensorType.VIBRATION);
-          sensor.setSensorValue(packetHelper.xGValue());
+          sensor.setSensorValue("1.5");//packetHelper.xGValue());
           message.addSensors(sensor);
           SensorInformation.LocationInformation.Builder location = SensorInformation.LocationInformation.newBuilder();
           //Location loc = LocationTracker.getLocation();
@@ -263,13 +263,13 @@ public class Packetizer extends AbstractSource implements Runnable {
 //            location.setLongitude(loc.getLongitude());
 //            message.setLocation(location);
 //          }
-//          else{
+//          else{ 
             location.setLatitude(43.084603);
             location.setLongitude(-77.680312);
             message.setLocation(location);
           //}
           return message.build();
-      }
+      //}
     }
   }
   

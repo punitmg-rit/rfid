@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
 	private Button clearButton;
 	private EditText textArea;
 	private static boolean sendingData;
-
+	private Communicator communicator;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
 		sendButton = (Button) findViewById(R.id.buttonSend);
 		clearButton = (Button) findViewById(R.id.buttonClear);
 		textArea = (EditText) findViewById(R.id.editText1);
+		communicator = new Communicator();
 
 		sendButton.setOnClickListener(new View.OnClickListener() {
 
@@ -35,8 +36,8 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				if(!sendingData){
 					// call the AsyncTask
-					SendDataTask s = new SendDataTask();
-					s.execute(this.toString());
+					SendDataTask s = new SendDataTask(communicator);
+					s.execute();
 					sendButton.setEnabled(false);
 				}
 
@@ -47,7 +48,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-
+				communicator.disconnect();
 			}
 		});
 
@@ -61,17 +62,20 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	
-
 }
 
 class SendDataTask extends AsyncTask<String, Integer, Long> {
-	protected Long doInBackground(String... str) {
+	Communicator communicator;
+	public SendDataTask(Communicator communicator) {
+		this.communicator = communicator;
+	}
+
+	protected Long doInBackground(String...  param) {
 		try{
-		Communicator communicator = new Communicator();
-		communicator.initalizeTCPClient("129.21.175.114", 3000);
+		
+		communicator.initalizeTCPClient("129.21.106.147", 3000);
 		if(!communicator.getConnected())
-        {
+        { 
             communicator.connect();
             if(communicator.getConnected())
             {
@@ -89,7 +93,6 @@ class SendDataTask extends AsyncTask<String, Integer, Long> {
         {
             communicator.disconnect();
         }
-		communicator.run();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -101,6 +104,7 @@ class SendDataTask extends AsyncTask<String, Integer, Long> {
 
 	protected void onPostExecute(Long result) {
 	}
+
 }
 
 
